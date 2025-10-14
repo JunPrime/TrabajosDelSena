@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Legends | El Lore de las Tierras Salvajes</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            /* Colores inspirados en la interfaz de Apex */
+            --color-fondo: #121212;
+            --color-texto-principal: #e0e0e0;
+            --color-acento-naranja: #ff4500;
+            --color-acento-gris: #333;
+            --color-borde: #444;
+            --color-resaltado: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto-principal);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: var(--color-acento-gris);
+            color: var(--color-acento-naranja);
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--color-acento-naranja);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* Títulos de sección */
+        h2 {
+            color: var(--color-acento-naranja);
+            border-left: 5px solid var(--color-acento-naranja);
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--color-texto-principal);
+            margin-top: 30px;
+            font-size: 1.4em;
+            border-bottom: 1px dashed var(--color-borde);
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Estilo para las tarjetas de Lore (Leyendas) */
+        .leyenda-card {
+            background-color: var(--color-acento-gris);
+            border-left: 3px solid var(--color-acento-naranja);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .leyenda-card:hover {
+            background-color: var(--color-resaltado);
+        }
+
+        .leyenda-card strong {
+            color: var(--color-acento-naranja);
+        }
+
+        /* Estilo para el listado de Eventos */
+        .eventos-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .eventos-list li {
+            background-color: var(--color-acento-gris);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 3px solid var(--color-borde);
+        }
+
+        .eventos-list li strong {
+            color: var(--color-acento-naranja);
+        }
+
+        /* Estilo para la tabla de fondo */
+        .tabla-fondo {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9em;
+            text-align: left;
+        }
+
+        .tabla-fondo th, .tabla-fondo td {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .tabla-fondo th {
+            background-color: var(--color-acento-naranja);
+            color: var(--color-fondo);
+            text-transform: uppercase;
+        }
+
+        .tabla-fondo tr:nth-child(even) {
+            background-color: var(--color-resaltado);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-borde);
+            color: #777;
+            font-size: 0.8em;
+        }
+
+        /* Media Queries para responsividad */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Apex Legends Lore Hub</h1>
+        <p>Explora el trasfondo de las Tierras Salvajes y sus Leyendas.</p>
+    </header>
+
+    <div class="container">
+
+        <section id="universo">
+            <h2>El Universo: Las Tierras Salvajes</h2>
+            <p>Apex Legends se desarrolla en las <strong>Tierras Salvajes</strong> (Outlands), una colección de planetas colonizados al margen del espacio controlado. El juego tiene lugar décadas después de los conflictos de la guerra civil narrada en la saga <em>Titanfall</em> (IMC vs. La Milicia).</p>
+
+            <h3>El Origen de los Juegos Apex</h3>
+            <p>Tras el fin de la gran guerra, la región de la Frontera quedó en relativa paz. El <strong>Sindicato de Mercenarios</strong>, una confederación de planetas, creó los Juegos Apex: un deporte de combate televisado diseñado para mantener a las masas entretenidas y canalizar la violencia residual. El comisionado es <strong>Kuben Blisk</strong>, un ex mercenario y líder de los Apex Predators de la era Titanfall.</p>
+            
+            <table class="tabla-fondo">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Tierras Salvajes (Outlands)**</td>
+                        <td>Colección de planetas donde se ubican los Juegos, lejos del núcleo de la Frontera.</td>
+                    </tr>
+                    <tr>
+                        <td>**Guerra de la Frontera**</td>
+                        <td>Conflicto previo (Titanfall) entre la IMC y La Milicia, cuyo final dio origen a los Juegos.</td>
+                    </tr>
+                    <tr>
+                        <td>**El Sindicato**</td>
+                        <td>Gobierno/organización que patrocina y controla los Juegos Apex.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="leyendas">
+            <h2>Leyendas y sus Conflictos</h2>
+
+            <div class="leyenda-card">
+                <h3>Wraith (Renée Blasey) & Ash (Dra. Reid)</h3>
+                <p><strong>Wraith</strong> es una ex científica de la IMC que perdió la memoria tras experimentos dimensionales. Busca la verdad de su pasado. Su historia se conecta con <strong>Ash</strong>, el simulacrum de la Dra. Ashleigh Reid, una mente fría y calculadora que traicionó a la Dra. Somers (Horizon) y está ligada a los Apex Predators de Blisk.</p>
+            </div>
+
+            <div class="leyenda-card">
+                <h3>Loba & Revenant</h3>
+                <p>La rivalidad central. <strong>Revenant</strong> es un asesino sintético cuya conciencia ha sido transferida múltiples veces a nuevos cuerpos (simulacrum). Mató a los padres de <strong>Loba</strong> cuando ella era niña. Loba usa su talento como ladrona para infiltrarse en los Juegos y destruir el código fuente de Revenant para que pueda morir permanentemente.</p>
+            </div>
+
+            <div class="leyenda-card">
+                <h3>Horizon (Dra. Somers)</h3>
+                <p>Astrofísica de 125 años atrapada en el tiempo por una traición. Participa en los Juegos para ganar dinero y los recursos necesarios para un viaje en el tiempo que le permita reunirse con su hijo, <strong>Newton</strong>.</p>
+            </div>
+
+             <div class="leyenda-card">
+                <h3>Crypto (Tae Joon Park)</h3>
+                <p>Un genio del hacking incriminado por un asesinato. Entró en los Juegos para limpiar su nombre y exponer la corrupción y la conspiración del Sindicato que se esconde tras los reflectores.</p>
+            </div>
+        </section>
+
+        <section id="eventos">
+            <h2>Eventos Clave y Trama Avanzada</h2>
+            <ul class="eventos-list">
+                <li>
+                    <strong>La Cabeza de Revenant:</strong> Tras el plan de Loba, el código fuente original de Revenant es descubierto, pero su destrucción resulta ser más complicada, forzando una alianza tensa entre él y Loba.
+                </li>
+                <li>
+                    <strong>El Regreso de Ash:</strong> Los restos del simulacrum de Ash son desenterrados y reconstruidos, reavivando antiguos traumas en Wraith y revelando su conexión con Horizon.
+                </li>
+                <li>
+                    <strong>La Identidad de Newcastle:</strong> Se revela que la Leyenda Newcastle es en realidad <strong>Jackson Williams</strong>, el hermano de Bangalore, que fingió su muerte y robó la armadura para proteger a su familia.
+                </li>
+                <li>
+                    <strong>El Plan del Sindicato (Kill Code):</strong> Se intensifica la trama sobre los planes del Sindicato para usar la tecnología de los simulacrum (como la de Revenant) y el riesgo que esto representa para las Tierras Salvajes, involucrando directamente a Crypto.
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Apex Legends Lore Fan Page. Contenido basado en el universo de Respawn Entertainment y EA.</p>
+    </footer>
+
+</body>
+</html>
