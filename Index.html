@@ -63,6 +63,37 @@
             text-transform: uppercase;
         }
 
+        /* --- ESTILOS PARA EL NAV --- */
+        nav {
+            background-color: var(--color-acento-gris);
+            text-align: center;
+            border-bottom: 1px solid var(--color-borde);
+            padding: 10px 0;
+            /* Si quieres que el nav sea pegajoso (sticky) al hacer scroll: */
+            /* position: sticky;
+            top: 0;
+            z-index: 100; */
+        }
+
+        nav a {
+            color: var(--color-texto-principal);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0 10px;
+            display: inline-block;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            color: var(--color-fondo);
+            background-color: var(--color-acento-naranja);
+        }
+        /* --------------------------- */
+
+
         .container {
             width: 90%;
             max-width: 1200px;
@@ -297,6 +328,10 @@
 
         /* Media Queries para responsividad */
         @media (max-width: 768px) {
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
             .timeline::before {
                 left: 20px; /* Mueve la línea vertical a la izquierda en móviles */
             }
@@ -343,6 +378,11 @@
         <p>Explora el trasfondo de las Tierras Salvajes y sus Leyendas.</p>
     </header>
 
+    <nav>
+        <a href="#leyendas">Leyendas</a>
+        <a href="#universo">Historia</a>
+        <a href="#linea-tiempo">Temporadas</a>
+    </nav>
     <div class="container">
 
         <section id="universo">
