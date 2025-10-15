@@ -14,6 +14,7 @@
             --color-acento-gris: #333;
             --color-borde: #444;
             --color-resaltado: #3a3a3a;
+            --color-linea-tiempo: #555;
         }
 
         body {
@@ -32,6 +33,27 @@
             padding: 20px 0;
             text-align: center;
             border-bottom: 3px solid var(--color-acento-naranja);
+            position: relative;
+            overflow: hidden; /* Para que la imagen de fondo no se desborde */
+        }
+        
+        header::before { /* Imagen de fondo para el header */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://wallpapercave.com/wp/wp6889758.jpg'); /* IMAGEN DE FONDO DEL HEADER */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2; /* Opacidad para que el texto sea legible */
+            z-index: 0;
+        }
+
+        header h1, header p {
+            position: relative; /* Para que estén por encima de la imagen de fondo */
+            z-index: 1;
         }
 
         header h1 {
@@ -71,7 +93,62 @@
             margin-bottom: 15px;
         }
 
-        /* Estilo para las tarjetas de Lore (Leyendas) */
+        /* Imágenes dentro del contenido */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid var(--color-borde);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Galería de Leyendas */
+        .leyendas-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .leyenda-item {
+            background-color: var(--color-acento-gris);
+            border: 1px solid var(--color-borde);
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .leyenda-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .leyenda-item img {
+            width: 100%;
+            height: 150px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+            display: block;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .leyenda-item h4 {
+            color: var(--color-acento-naranja);
+            margin: 10px 0 5px;
+            font-size: 1.1em;
+        }
+
+        .leyenda-item p {
+            font-size: 0.9em;
+            color: #ccc;
+            padding: 0 10px;
+        }
+
+
+        /* Estilo para las tarjetas de Lore (Leyendas - si se usan fuera de la galería) */
         .leyenda-card {
             background-color: var(--color-acento-gris);
             border-left: 3px solid var(--color-acento-naranja);
@@ -131,6 +208,84 @@
             background-color: var(--color-resaltado);
         }
 
+        /* --- Estilos para la Línea de Tiempo --- */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            list-style: none;
+            margin: 40px 0;
+        }
+
+        .timeline::before { /* Línea vertical central */
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: var(--color-linea-tiempo);
+            margin-left: -2px;
+        }
+
+        .timeline li {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline li:nth-child(even) {
+            text-align: right;
+        }
+
+        .timeline-content {
+            background-color: var(--color-acento-gris);
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .timeline li:nth-child(odd) .timeline-content {
+            float: left;
+            clear: both;
+            border-left: 3px solid var(--color-acento-naranja);
+        }
+
+        .timeline li:nth-child(even) .timeline-content {
+            float: right;
+            clear: both;
+            border-right: 3px solid var(--color-acento-naranja);
+        }
+
+        .timeline-date {
+            background-color: var(--color-acento-naranja);
+            color: var(--color-fondo);
+            padding: 5px 15px;
+            border-radius: 3px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-point { /* Círculo en la línea vertical */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--color-acento-naranja);
+            border: 2px solid var(--color-fondo);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline li:nth-child(odd) .timeline-point { /* Ajuste para el punto si el contenido es a la izquierda */
+            left: 50%;
+        }
+        .timeline li:nth-child(even) .timeline-point { /* Ajuste para el punto si el contenido es a la derecha */
+            left: 50%;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -141,6 +296,27 @@
         }
 
         /* Media Queries para responsividad */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px; /* Mueve la línea vertical a la izquierda en móviles */
+            }
+            .timeline li {
+                text-align: left !important; /* Fuerza el texto a la izquierda */
+            }
+            .timeline li:nth-child(odd) .timeline-content,
+            .timeline li:nth-child(even) .timeline-content {
+                width: calc(100% - 60px); /* Ajusta ancho para móviles */
+                float: right;
+                clear: both;
+                border-left: 3px solid var(--color-acento-naranja); /* Unifica el borde a la izquierda */
+                border-right: none;
+                margin-left: 40px; /* Espacio para la línea vertical */
+            }
+            .timeline-point {
+                left: 20px; /* Mueve el punto a la izquierda */
+            }
+        }
+
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.8em;
@@ -150,6 +326,12 @@
             }
             .container {
                 width: 95%;
+            }
+            .leyendas-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .leyenda-item img {
+                height: 120px;
             }
         }
     </style>
@@ -165,10 +347,11 @@
 
         <section id="universo">
             <h2>El Universo: Las Tierras Salvajes</h2>
-            <p>Apex Legends se desarrolla en las <strong>Tierras Salvajes</strong> (Outlands), una colección de planetas colonizados al margen del espacio controlado. El juego tiene lugar décadas después de los conflictos de la guerra civil narrada en la saga <em>Titanfall</em> (IMC vs. La Milicia).</p>
+            <p>Apex Legends se desarrolla en las <strong>Tierras Salvajes</strong> (Outlands), una colección de planetas colonizados al margen del espacio controlado por la Interstellar Manufacturing Corporation (IMC) y la Milicia. El juego tiene lugar décadas después de los eventos de la guerra civil narrada en la saga <em>Titanfall</em>. La imagen de abajo te muestra un vistazo a algunos de los entornos del juego.</p>
+            <img src="https://wallpapers.com/images/high/apex-legends-broken-moon-squad-4k-gaming-psf6345n0b001r71.webp" alt="Paisaje de las Tierras Salvajes" class="content-image">
 
             <h3>El Origen de los Juegos Apex</h3>
-            <p>Tras el fin de la gran guerra, la región de la Frontera quedó en relativa paz. El <strong>Sindicato de Mercenarios</strong>, una confederación de planetas, creó los Juegos Apex: un deporte de combate televisado diseñado para mantener a las masas entretenidas y canalizar la violencia residual. El comisionado es <strong>Kuben Blisk</strong>, un ex mercenario y líder de los Apex Predators de la era Titanfall.</p>
+            <p>Tras el fin de la gran guerra entre la IMC y la Milicia, la región de la Frontera quedó en relativa paz. Los mercenarios de élite, como los <strong>Apex Predators</strong> (liderados por Kuben Blisk), se quedaron sin conflictos importantes. Para mantener el orden y entretener a las masas, el <strong>Sindicato de Mercenarios</strong>, una confederación de planetas, creó los <strong>Juegos Apex</strong>: un deporte de combate televisado diseñado para la fama, la fortuna y la adrenalina. Su comisionado es el mismísimo <strong>Kuben Blisk</strong>.</p>
             
             <table class="tabla-fondo">
                 <thead>
@@ -195,43 +378,137 @@
         </section>
 
         <section id="leyendas">
-            <h2>Leyendas y sus Conflictos</h2>
+            <h2>Las Leyendas de Apex</h2>
+            <p>Conoce a los campeones y sus motivaciones. Cada Leyenda tiene una historia profunda que a menudo se entrelaza con la de otros, revelando un complejo tapiz de alianzas, rivalidades y venganzas.</p>
+            
+            <div class="leyendas-gallery">
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/5/52/Wraith_portrait.png" alt="Wraith">
+                    <h4>Wraith</h4>
+                    <p>Científica amnésica en busca de su pasado.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/a/ab/Revenant_portrait.png" alt="Revenant">
+                    <h4>Revenant</h4>
+                    <p>Asesino sintético que anhela la muerte.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/b/ba/Loba_portrait.png" alt="Loba">
+                    <h4>Loba</h4>
+                    <p>Ladrona de alta sociedad en busca de venganza.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/2/23/Horizon_portrait.png" alt="Horizon">
+                    <h4>Horizon</h4>
+                    <p>Científica espacial atrapada en el tiempo.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/6/6f/Crypto_portrait.png" alt="Crypto">
+                    <h4>Crypto</h4>
+                    <p>Hacker que busca limpiar su nombre.</p>
+                </div>
+                 <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/1/1d/Ash_portrait.png" alt="Ash">
+                    <h4>Ash</h4>
+                    <p>La fría y calculadora piloto de Titanfall.</p>
+                </div>
+            </div>
+
+            <p>A continuación, exploramos algunas de las conexiones más intrincadas entre ellos:</p>
 
             <div class="leyenda-card">
                 <h3>Wraith (Renée Blasey) & Ash (Dra. Reid)</h3>
-                <p><strong>Wraith</strong> es una ex científica de la IMC que perdió la memoria tras experimentos dimensionales. Busca la verdad de su pasado. Su historia se conecta con <strong>Ash</strong>, el simulacrum de la Dra. Ashleigh Reid, una mente fría y calculadora que traicionó a la Dra. Somers (Horizon) y está ligada a los Apex Predators de Blisk.</p>
+                <p><strong>Wraith</strong> es una ex científica de la IMC que perdió la memoria tras experimentos dimensionales. Busca la verdad de su pasado, a menudo conectando con sus "ecos" de otras realidades. Su historia se cruza con <strong>Ash</strong>, el simulacrum de la Dra. Ashleigh Reid, una mente fría y calculadora que fue la traidora alumna de Horizon y está ligada a los Apex Predators de Blisk.</p>
             </div>
 
             <div class="leyenda-card">
                 <h3>Loba & Revenant</h3>
-                <p>La rivalidad central. <strong>Revenant</strong> es un asesino sintético cuya conciencia ha sido transferida múltiples veces a nuevos cuerpos (simulacrum). Mató a los padres de <strong>Loba</strong> cuando ella era niña. Loba usa su talento como ladrona para infiltrarse en los Juegos y destruir el código fuente de Revenant para que pueda morir permanentemente.</p>
+                <p>La rivalidad central del universo de Apex. <strong>Revenant</strong> es un asesino sintético cuya conciencia ha sido transferida múltiples veces a nuevos cuerpos (simulacrum) en un ciclo interminable de tortura. Mató a los padres de <strong>Loba</strong> cuando ella era niña, dejándola huérfana. Loba, ahora una ladrona de guante blanco, usa su talento y los Juegos para infiltrarse y destruir el código fuente de Revenant para que pueda morir permanentemente y encontrar la paz.</p>
+                <img src="https://static.wikia.nocookie.net/apexlegends_gamepedia_en/images/e/e0/Loading_Screen_-_Broken_Ghost_Pt.2.png" alt="Loba y Revenant" class="content-image">
             </div>
 
             <div class="leyenda-card">
                 <h3>Horizon (Dra. Somers)</h3>
-                <p>Astrofísica de 125 años atrapada en el tiempo por una traición. Participa en los Juegos para ganar dinero y los recursos necesarios para un viaje en el tiempo que le permita reunirse con su hijo, <strong>Newton</strong>.</p>
-            </div>
-
-             <div class="leyenda-card">
-                <h3>Crypto (Tae Joon Park)</h3>
-                <p>Un genio del hacking incriminado por un asesinato. Entró en los Juegos para limpiar su nombre y exponer la corrupción y la conspiración del Sindicato que se esconde tras los reflectores.</p>
+                <p>La <strong>Dra. Mary Somers</strong>, conocida como Horizon, es una astrofísica de 125 años (por dilatación del tiempo) atrapada en el presente tras ser traicionada por su antigua alumna. Participa en los Juegos para ganar dinero y los recursos necesarios para un viaje en el tiempo que le permita reunirse con su hijo, <strong>Newton</strong>, a quien dejó atrás hace más de un siglo en su línea temporal.</p>
             </div>
         </section>
 
-        <section id="eventos">
-            <h2>Eventos Clave y Trama Avanzada</h2>
-            <ul class="eventos-list">
+        <section id="linea-tiempo">
+            <h2>Línea de Tiempo del Lore de Apex</h2>
+            <p>Explora los eventos clave que han moldeado las Tierras Salvajes y las vidas de nuestras Leyendas.</p>
+
+            <ul class="timeline">
                 <li>
-                    <strong>La Cabeza de Revenant:</strong> Tras el plan de Loba, el código fuente original de Revenant es descubierto, pero su destrucción resulta ser más complicada, forzando una alianza tensa entre él y Loba.
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Pre-Juegos Apex</div>
+                        <h3>Guerras de la Frontera</h3>
+                        <p>La sangrienta guerra entre la <strong>IMC</strong> y la <strong>Milicia</strong> (eventos de Titanfall) culmina, dejando la Frontera devastada y a muchos ex-soldados y mercenarios (como Blisk) sin un propósito.</p>
+                    </div>
                 </li>
                 <li>
-                    <strong>El Regreso de Ash:</strong> Los restos del simulacrum de Ash son desenterrados y reconstruidos, reavivando antiguos traumas en Wraith y revelando su conexión con Horizon.
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Décadas Antes</div>
+                        <h3>Creación de los Juegos Apex</h3>
+                        <p>El <strong>Sindicato de Mercenarios</strong>, buscando controlar las Tierras Salvajes, establece los <strong>Juegos Apex</strong>, un deporte de combate que rápidamente se vuelve increíblemente popular, atrayendo a diversas figuras.</p>
+                    </div>
                 </li>
                 <li>
-                    <strong>La Identidad de Newcastle:</strong> Se revela que la Leyenda Newcastle es en realidad <strong>Jackson Williams</strong>, el hermano de Bangalore, que fingió su muerte y robó la armadura para proteger a su familia.
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Muchos Años Atrás</div>
+                        <h3>El Asesinato de los Silva</h3>
+                        <p><strong>Revenant</strong>, en su forma de simulacrum, asesina brutalmente a los padres de una joven <strong>Loba Andrade</strong>, sembrando las semillas de su futura venganza.</p>
+                    </div>
                 </li>
                 <li>
-                    <strong>El Plan del Sindicato (Kill Code):</strong> Se intensifica la trama sobre los planes del Sindicato para usar la tecnología de los simulacrum (como la de Revenant) y el riesgo que esto representa para las Tierras Salvajes, involucrando directamente a Crypto.
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Reciente (Inicio del Juego)</div>
+                        <h3>Primeras Temporadas y Secretos</h3>
+                        <p>Entrada de Leyendas como Wraith, Bloodhound, Pathfinder. Se empiezan a descubrir los secretos de la <strong>Dra. Renée Blasey (Wraith)</strong> y las conspiraciones del Sindicato.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporada 5: Fortuna Perdida</div>
+                        <h3>La Venganza de Loba</h3>
+                        <p><strong>Loba</strong> entra a los Juegos con el único objetivo de encontrar y destruir la cabeza (código fuente) de <strong>Revenant</strong>, desatando una serie de eventos que afectan a todas las Leyendas.</p>
+                    </div>
+                </li>
+                 <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporada 7: Ascensión</div>
+                        <h3>El Viaje de Horizon a Olympus</h3>
+                        <p>La <strong>Dra. Mary Somers (Horizon)</strong> llega a los Juegos desde el pasado, buscando la forma de manipular el tiempo para reunirse con su hijo.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporada 11: Escape</div>
+                        <h3>El Regreso de Ash</h3>
+                        <p>Los restos del simulacrum de <strong>Ash</strong>, la exalumna traidora de Horizon y parte del grupo Apex Predators, son desenterrados y reconstruidos, revelando más sobre el pasado de la Frontera.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporada 13: Salvadores</div>
+                        <h3>La Verdad de Newcastle</h3>
+                        <p>Se revela la identidad secreta de <strong>Newcastle</strong> como <strong>Jackson Williams</strong>, el hermano de Bangalore, quien tomó la identidad para salvar a su familia.</p>
+                    </div>
+                </li>
+                 <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Eventos Actuales</div>
+                        <h3>El Protocolo Kill Code</h3>
+                        <p>Las Leyendas se ven envueltas en una compleja conspiración del <strong>Sindicato</strong> que involucra la creación de un nuevo ejército de simulacrums, poniendo en riesgo la estabilidad de las Tierras Salvajes.</p>
+                    </div>
                 </li>
             </ul>
         </section>
