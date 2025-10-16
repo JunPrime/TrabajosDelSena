@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE FINALS | El Mayor Show Virtual del Planeta</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            /* Colores inspirados en la interfaz de The Finals (Amarillo/Oro/Cian) */
+            --color-fondo: #121212;
+            --color-texto-principal: #e0e0e0;
+            --color-acento-finals: #fff000; /* Amarillo brillante de The Finals */
+            --color-acento-gris: #333;
+            --color-borde: #444;
+            --color-resaltado: #3a3a3a;
+            --color-linea-tiempo: #555;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--color-fondo);
+            color: var(--color-texto-principal);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: var(--color-acento-gris);
+            color: yellow; /* Se usa amarillo puro para el título para mayor contraste */
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--color-acento-finals);
+            position: relative;
+            overflow: hidden; /* Para que la imagen de fondo no se desborde */
+        }
+        
+        header::before { /* Imagen de fondo para el header (The Finals) */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Imagen de fondo de The Finals */
+            background-image: url('https://w0.peakpx.com/wallpaper/70/463/HD-wallpaper-the-finals-4k-the-finals-the-finals-game-thefinals.jpg'); 
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2; /* Opacidad para que el texto sea legible */
+            z-index: 0;
+        }
+
+        header h1, header p {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- ESTILOS PARA EL NAV --- */
+        nav {
+            background-color: var(--color-acento-gris);
+            text-align: center;
+            border-bottom: 1px solid var(--color-borde);
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: var(--color-texto-principal);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0 10px;
+            display: inline-block;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 3px;
+        }
+
+        nav a:hover {
+            color: var(--color-fondo);
+            background-color: var(--color-acento-finals);
+        }
+
+        /* Contenedor principal del Dropdown */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Estilo del botón (texto) del dropdown */
+        .dropbtn {
+            color: var(--color-texto-principal);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 0 10px;
+            display: inline-block;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Efecto hover en el botón del dropdown */
+        .dropdown:hover .dropbtn {
+            color: var(--color-fondo);
+            background-color: var(--color-acento-finals);
+        }
+
+        /* Contenido del Dropdown (los enlaces ocultos) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--color-acento-gris);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 10;
+            border: 1px solid var(--color-acento-finals);
+            padding: 5px 0;
+            left: 50%; /* Centrado bajo el botón */
+            transform: translateX(-50%); /* Centrado bajo el botón */
+        }
+
+        .dropdown-content a {
+            color: var(--color-texto-principal);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            margin: 0; /* Anula margen del nav a */
+            font-weight: normal;
+            text-transform: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--color-resaltado);
+            color: var(--color-acento-finals);
+        }
+
+        /* Mostrar el menú desplegable al pasar el ratón sobre el contenedor */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        /* --------------------------- */
+
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* Títulos de sección */
+        h2 {
+            color: var(--color-acento-finals);
+            border-left: 5px solid var(--color-acento-finals);
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--color-texto-principal);
+            margin-top: 30px;
+            font-size: 1.4em;
+            border-bottom: 1px dashed var(--color-borde);
+            padding-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Imágenes dentro del contenido */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid var(--color-borde);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        /* Galería de Agentes/Concursantes */
+        .leyendas-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .leyenda-item {
+            background-color: var(--color-acento-gris);
+            border: 1px solid var(--color-borde);
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .leyenda-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .leyenda-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .leyenda-item h4 {
+            color: var(--color-acento-finals);
+            margin: 10px 0 5px;
+            font-size: 1.1em;
+        }
+
+        .leyenda-item p {
+            font-size: 0.9em;
+            color: #ccc;
+            padding: 0 10px;
+        }
+
+
+        /* Estilo para las tarjetas de Lore (Contratos) */
+        .leyenda-card {
+            background-color: var(--color-acento-gris);
+            border-left: 3px solid var(--color-acento-finals);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .leyenda-card:hover {
+            background-color: var(--color-resaltado);
+        }
+
+        .leyenda-card strong {
+            color: var(--color-acento-finals);
+        }
+
+        /* Estilo para la tabla de fondo */
+        .tabla-fondo {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9em;
+            text-align: left;
+        }
+
+        .tabla-fondo th, .tabla-fondo td {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        .tabla-fondo th {
+            background-color: var(--color-acento-finals);
+            color: var(--color-fondo);
+            text-transform: uppercase;
+        }
+
+        .tabla-fondo tr:nth-child(even) {
+            background-color: var(--color-resaltado);
+        }
+
+        /* --- Estilos para la Línea de Tiempo --- */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            list-style: none;
+            margin: 40px 0;
+        }
+
+        .timeline::before { /* Línea vertical central */
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: var(--color-linea-tiempo);
+            margin-left: -2px;
+        }
+
+        .timeline li {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .timeline li:nth-child(even) {
+            text-align: right;
+        }
+
+        .timeline-content {
+            background-color: var(--color-acento-gris);
+            padding: 20px;
+            border-radius: 5px;
+            width: 45%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        .timeline li:nth-child(odd) .timeline-content {
+            float: left;
+            clear: both;
+            border-left: 3px solid var(--color-acento-finals);
+        }
+
+        .timeline li:nth-child(even) .timeline-content {
+            float: right;
+            clear: both;
+            border-right: 3px solid var(--color-acento-finals);
+        }
+
+        .timeline-date {
+            background-color: var(--color-acento-finals);
+            color: var(--color-fondo);
+            padding: 5px 15px;
+            border-radius: 3px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-point { /* Círculo en la línea vertical */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--color-acento-finals);
+            border: 2px solid var(--color-fondo);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline li:nth-child(odd) .timeline-point {
+            left: 50%;
+        }
+        .timeline li:nth-child(even) .timeline-point {
+            left: 50%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-borde);
+            color: #777;
+            font-size: 0.8em;
+        }
+
+        /* Media Queries para responsividad (Se mantienen) */
+        @media (max-width: 768px) {
+            nav a, .dropbtn {
+                display: block;
+                margin: 5px 0;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                transform: none;
+                box-shadow: none;
+                border-left: 3px solid var(--color-acento-finals); 
+                border-top: none;
+                padding: 0;
+            }
+            .dropdown-content a {
+                padding-left: 40px;
+            }
+            .dropdown:hover .dropdown-content {
+                 display: none;
+            }
+             .timeline::before {
+                left: 20px;
+            }
+            .timeline li {
+                text-align: left !important;
+            }
+            .timeline li:nth-child(odd) .timeline-content,
+            .timeline li:nth-child(even) .timeline-content {
+                width: calc(100% - 60px);
+                float: right;
+                clear: both;
+                border-left: 3px solid var(--color-acento-finals);
+                border-right: none;
+                margin-left: 40px;
+            }
+            .timeline-point {
+                left: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .container {
+                width: 95%;
+            }
+            .leyendas-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .leyenda-item img {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THE FINALS | El Show Virtual</h1>
+        <p>Destrucción, dinero y fama en el año 2100.</p>
+    </header>
+
+    <nav>
+        <a href="Index.html">Inicio</a>
+        <a href="#concursantes">Concursantes</a>
+        <a href="#show">El Show</a>
+        <a href="#linea-tiempo">Cronología</a>
+        
+        <div class="dropdown">
+            <div class="dropbtn">Otros Juegos ▼</div>
+            <div class="dropdown-content">
+                <a href="APEX.html">Apex Legends</a>
+                <a href="VALORANT.html">Valorant</a>
+                <a href="CoD.html">Call of Duty</a>
+                <a href="BATTLEFIELD.html">Battlefield</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <section id="show">
+            <h2>El Universo: El "Meatspace" y la Realidad Virtual</h2>
+            <p>*The Finals* tiene lugar aproximadamente en el año **2100**. La mayoría de la humanidad pasa su tiempo en el <strong>Mundo Virtual</strong>, siendo la realidad física (el mundo real) conocida como **Meatspace** (Espacio de Carne). El juego en sí es un *reality show* virtual masivo y global, transmitido para miles de millones de fanáticos, ofreciendo una vía de escape y una promesa de fama y fortuna a sus concursantes.</p>
+            <img src="https://i.ytimg.com/vi/S8WJgLzF2jI/maxresdefault.jpg" alt="Mapa de The Finals con destrucción" class="content-image">
+
+            <h3>MultiCo y los Patrocinadores</h3>
+            <p>El show es gestionado y supervisado por **MultiCo**, una megacorporación con raíces que se remontan al siglo XX. El verdadero motor del programa es la publicidad. Docenas de compañías (como Ospuze, Holtow, Engimo, etc.) patrocinan los eventos, llenando la arena con sus marcas a cambio de exposición a la audiencia mundial. Los concursantes ganan fama y premios, pero el gran dinero y el poder lo retiene MultiCo.</p>
+            
+            <table class="tabla-fondo">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**The Finals**</td>
+                        <td>El programa de televisión virtual de combate más grande del planeta, donde la destrucción es un factor clave del éxito.</td>
+                    </tr>
+                    <tr>
+                        <td>**MultiCo**</td>
+                        <td>La corporación que supervisa, produce y se beneficia del *reality show*.</td>
+                    </tr>
+                    <tr>
+                        <td>**Meatspace**</td>
+                        <td>Término despectivo utilizado en el lore para referirse al mundo real, en contraposición al popular Mundo Virtual.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="concursantes">
+            <h2>Los Concursantes y Personajes del Show</h2>
+            <p>Los concursantes son jugadores que participan en el show a través de tecnología de Realidad Virtual. Los comentaristas son la cara pública del programa y a menudo revelan fragmentos de lore a través de sus interacciones.</p>
+            
+            <div class="leyendas-gallery">
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/6/69/Contestant_Light_Render.png" alt="Concursante Ligero">
+                    <h4>Clase Ligera</h4>
+                    <p>Rápidos y ágiles, pero con menos salud. Enfocados en la evasión.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/3/36/Contestant_Medium_Render.png" alt="Concursante Medio">
+                    <h4>Clase Media</h4>
+                    <p>Equilibrados. Únicos con acceso a la habilidad de revivir con desfibrilador.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/9/91/Contestant_Heavy_Render.png" alt="Concursante Pesado">
+                    <h4>Clase Pesada</h4>
+                    <p>Lentos, pero con gran cantidad de salud y capaces de abrir brechas en el terreno.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/2/25/Scotty_and_June.png" alt="Scotty y June">
+                    <h4>Scotty & June</h4>
+                    <p>Los carismáticos comentaristas del show. Scotty es un exconcursante.</p>
+                </div>
+                <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/f/f0/Namatama_Full_Artwork.png" alt="Namatama">
+                    <h4>Namatama</h4>
+                    <p>La popular mascota oficial del show con forma de huevo.</p>
+                </div>
+                 <div class="leyenda-item">
+                    <img src="https://static.wikia.nocookie.net/thefinals_gamepedia_en/images/7/75/Ariad_CNS_Render.png" alt="Ariad">
+                    <h4>Ariad (CNS)</h4>
+                    <p>Concursante conocido por ser miembro del colectivo hacker CNS.</p>
+                </div>
+            </div>
+
+            <p>Las fuerzas en las sombras y las conspiraciones:</p>
+
+            <div class="leyenda-card">
+                <h3>El Colectivo Hacking CNS</h3>
+                <p><strong>CNS (Central Nervous System)</strong> es un colectivo *hacker* que busca exponer la verdad detrás del *reality show* y la corporación MultiCo. Han organizado múltiples intrusiones en el sistema del juego, alterando la física y los mapas para despertar a los concursantes y a la audiencia. En su primera intrusión, se reveló que el show es un programa de IA sensible, capaz de defenderse.</p>
+            </div>
+
+            <div class="leyenda-card">
+                <h3>La Revelación de MultiCo</h3>
+                <p>En temporadas posteriores, se ha insinuado que los ataques de CNS no solo fueron permitidos, sino **facilitados por MultiCo** por razones desconocidas. Una teoría popular sugiere que el show podría estar cosechando datos o conciencia para un propósito mayor (posiblemente conectado con el juego *ARC Raiders* del mismo desarrollador).</p>
+            </div>
+
+        </section>
+
+        <section id="linea-tiempo">
+            <h2>Cronología del Show</h2>
+            <p>Los eventos del lore de The Finals a menudo se revelan a través de las temporadas y las intrusiones del CNS.</p>
+
+            <ul class="timeline">
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Pre-Show (2100)</div>
+                        <h3>El Ascenso de MultiCo</h3>
+                        <p>MultiCo, una corporación con orígenes en el siglo XX, consolida su poder y establece la base para crear el *reality show* virtual de combate.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Lanzamiento</div>
+                        <h3>Nacimiento de THE FINALS</h3>
+                        <p>El juego virtual se lanza al público global, convirtiéndose en el mayor fenómeno de entretenimiento. Concursantes luchan por fama y dinero en arenas destructibles.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporada 2</div>
+                        <h3>Primera Intrusión de CNS</h3>
+                        <p>El colectivo hacker CNS realiza su primera gran intrusión, introduciendo *glitches*, reglas extrañas y el mapa fallido **SYS_HORIZON** para exponer el código del juego.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Post-Intrusión</div>
+                        <h3>Revelación de la IA</h3>
+                        <p>El intento de MultiCo de restablecer el sistema tras el *hack* de CNS revela que el programa *The Finals* no es solo un código, sino una **IA sensible**.</p>
+                    </div>
+                </li>
+                 <li>
+                    <div class="timeline-point"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Temporadas Recientes</div>
+                        <h3>La Conspiración de MultiCo</h3>
+                        <p>El lore actual sugiere que MultiCo pudo haber permitido el ataque de CNS, usando el caos y la destrucción para sus propios fines corporativos, posiblemente robando datos de los concursantes.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 The Finals Lore Fan Page. Contenido basado en el universo de Embark Studios.</p>
+    </footer>
+
+</body>
+</html>
